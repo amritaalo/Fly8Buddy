@@ -1,0 +1,118 @@
+<section id="first-tab-group" class="tabgroup">
+  <div id="tab1">
+      <div class="submit-form">
+          <h4>Check availability for <em>direction</em>:</h4>
+          <form id="form-submit" #searchflightForm="ngForm" (ngSubmit)="OnCityChange(city1,city2,dep_date)">
+              <div class="row">
+                  <div class="col-md-6">
+                      <fieldset>
+                          <label for="from">From:</label>
+                          <select required name="city1" id="city1" [(ngModel)]="city1">
+                              <option value="">Select a location...</option>
+                              <option value="CAM">Cambodia</option>
+                              <option value="HON">Hong Kong</option>
+                              <option value="IND">India</option>
+                              <option value="JAP">Japan</option>
+                              <option value="KOR">Korea</option>
+                              <option value="SIN">Singapore</option>
+                              <option value="THAI">Thailand</option>
+                              <option value="VIE">Vietnam</option>
+                              <option value="LON">London</option>
+                              <option value="BOM">Mumbai</option>
+                              <option value="DEL">Delhi</option>
+                              <option value="PAR">Paris</option>
+                              <option value="BAN">Bangalore</option>
+                              <option value="NY">NewYork</option>
+                          </select>
+                      </fieldset>
+                  </div>
+                  <div class="col-md-6">
+                      <fieldset>
+                          <label for="to">To:</label>
+                          <select required name="city2" id="city2" [(ngModel)]="city2">
+                              <option value="">Select a location...</option>
+                              <option value="CAM">Cambodia</option>
+                              <option value="HON">Hong Kong</option>
+                              <option value="IND">India</option>
+                              <option value="JAP">Japan</option>
+                              <option value="KOR">Korea</option>
+                              <option value="SIN">Singapore</option>
+                              <option value="THAI">Thailand</option>
+                              <option value="VIE">Vietnam</option>
+                              <option value="LON">London</option>
+                              <option value="BOM">Mumbai</option>
+                              <option value="DEL">Delhi</option>
+                              <option value="PAR">Paris</option>
+                              <option value="BAN">Bangalore</option>
+                              <option value="NY">NewYork</option>
+                          </select>
+                      </fieldset>
+                  </div>
+                  <div class="col-md-6">
+                      <fieldset>
+                          <label for="departure">Departure date:</label>
+                          <input name="Departure_date" type="date" class="form-control date" id="Departure_date" placeholder="Select date..." required="" [(ngModel)]="dep_date">
+                      </fieldset>
+                  </div>
+                  <div class="col-md-6">
+                      <fieldset>
+                          <button type="submit" id="form-submit" class="btn m-4">Show Flights</button>
+                      </fieldset>
+                  </div>
+              </div>
+          </form>
+      </div>
+  </div>
+
+      <div class="card bg-light" *ngIf=!showNoResult>
+        <div class="card-body" *ngFor="let item of foundCities">
+          <p><b>Airline:</b>{{item.Airline}} <b>Date of Journey:</b>{{item.Departure_date}} <b>Base Price:</b>{{item.BasePrice}} </p>
+          <button class="btn btn-primary" (click)="bookTickets(item.Airline,item.Departure_date,item.BasePrice)">Book Ticket</button>
+        </div>
+      </div>
+      <div *ngIf=showNoResult>
+        <h2 class="text-dark">No Flights Available</h2>
+        <p class="text-info">Search Once Again</p>
+      </div>
+
+      <div class="submit-form" *ngIf=showCustomerForm>
+        <form #customerForm="ngForm" (ngSubmit)="ViewConfirmation(FirstPerson,SecondPerson,FirstChild)">
+          <h4>Fill Customer Details:</h4>
+          <div class="row">
+              <div class="col-md-6">
+                <fieldset>
+                  <label for="FirstPerson">First Person</label>
+                  <input type="text" id="FirstPerson" name="FirstPerson" [(ngModel)]="FirstPerson">
+                </fieldset>
+              </div>
+              <div class="col-md-6">
+                <label for="SecondPerson">Second Person</label>
+                <input type="text" id="SecondPerson" name="SecondPerson" [(ngModel)]="SecondPerson">
+              </div>
+              <div class="col-md-6">
+                <label for="FirstChild">First Child</label>
+                <input type="text" id="FirstChild" name="FirstChild" [(ngModel)]="FirstChild">
+              </div>
+              <div class="col-md-12">
+                <div class="col-md-6">
+                  <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+                </div>
+                <div class="col-md-6">
+                  <button type="reset" class="btn btn-secondary" value="Reset">Reset</button>
+                </div>
+              </div>
+          </div>
+          </form>
+      </div>
+
+        <div *ngIf=showViewConfirmationForm>
+          <form #showViewTicketForm="ngForm" (ngSubmit)="ViewTicket()">
+              <h4 class="text-danger">Your Ticket booked successfully</h4>
+              <br/>
+              <button type="submit" class="btn btn-primary" value="Submit">View Ticket</button>
+            <div class="bg-light" [innerHTML]="ticketContent">
+            </div>
+            <button type="button" class="btn btn-success mt-4" (click)="DownloadTicket()">Download Ticket</button>
+          </form>
+      </div>
+</section>
