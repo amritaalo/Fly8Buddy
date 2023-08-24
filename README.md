@@ -1,6 +1,20 @@
 # Fly8Buddy
 
+This is a simple flight reservation system application using HTML,
+CSS, Bootstrap, Typescript and Angular.
+
+The purpose of Fly8 buddy is to automate a company's aircraft
+operation, seat reservation, and confirmation processes.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.1.
+
+Features of the application:
+• Home page
+• Search flight page
+• Search results page
+• Customer details page
+• View ticket page
+• Download ticket page
 
 ## Development server
 
